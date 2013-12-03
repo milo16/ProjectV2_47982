@@ -1,10 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Luis Pow Sang
- * Created on November 18, 2013, 11:08 PM
- * Tic Tac Toe Game (I'm not sure yet about doing this game for my project #2)
- * Note: my project #1 is hard to expand to 250 lines, I'm trying to find another 
- * game for my project #2.
+ * December 2nd, 2013, 7:00 PM
+ * Tic Tac Toe Game 
  */
 
 //Libraries
@@ -14,28 +12,48 @@ using namespace std;
 //Global Constants
 
 //Function Prototypes
-void DisplayBoard(char array[][3], int size);
+const int COLUMNS=3;//declare variable for COLUMNS
+void Initialization (char board[][COLUMNS],int);
+void DisplayBoard (char board[][COLUMNS], int);
 
 //Execution begins here
 int main(int argc, char** argv) {
+    //Declare variables
+    const int ROWS=3;
+    char arry [ROWS][COLUMNS];
+    char player='X';
+    int rws=0;
+    int clmns=0;
     
+    Initialization (arry,ROWS);
+    DisplayBoard (arry,ROWS);
+    
+    //inputs
+    cout<<"Choose desired row, player "<<player<<": ";
+    cin>>rws;
+
+    cout<<"Choose desired column, player "<<player<<": ";
+    cin>>clmns;
+  
     
     return 0;
 }
+    
+void DisplayBoard (char board[][COLUMNS], int r){
+    for(int i=0;i<r;i++){
+        for(int j=0;j<COLUMNS;j++){
+            cout<<" | "<<board[i][j];
+            }
+        cout<<endl;
+    }
+}
 
-void DisplayBoard(char array[][3], int size)
-{
-	
-	cout<<"::Tic Tac Toe::\n\n";
-
-	for (int x = 0; x < size; x++)
-	{
-		for (int y = 0; y < size; y++)
-		{
-			cout<<array[x][y];
-			cout<<" ";
-		}
-		cout<<endl;
-	}
-	cout<<endl;
+void Initialization (char board[][COLUMNS],int r){
+    for(int i=0;i<r;i++){
+        for(int j=0;j<COLUMNS;j++){
+            board [i][j]= 'n';
+            
+        }
+    }
+    
 }
