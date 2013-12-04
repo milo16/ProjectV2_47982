@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Luis Pow Sang
- * December 2nd, 2013, 7:00 PM
+ * December 3rd, 2013, 5:00 PM
  * Tic Tac Toe Game 
  */
 
@@ -15,6 +15,8 @@ using namespace std;
 const int COLUMNS=3;//declare variable for COLUMNS
 void Initialization (char board[][COLUMNS],int);
 void DisplayBoard (char board[][COLUMNS], int);
+bool Winner (char board[][COLUMNS], int);
+
 
 //Execution begins here
 int main(int argc, char** argv) {
@@ -34,11 +36,53 @@ int main(int argc, char** argv) {
 
     cout<<"Choose desired column, player "<<player<<": ";
     cin>>clmns;
+    
+    //If the spot is not available then displays a  message 
+        if(arry [rws][clmns] != 'n'){
+            cout<<"This spot is not available anymore, choose another one"<<endl;
+        }
+        else{
+            arry [rws][clmns]=player;
+
+            if (player=='X'){
+                player='O';
+            }
+            else {
+                player='X';
+            }
+        
+        
+    
+    }
   
     
     return 0;
 }
+
+//Function determines the winner horizontally, vertically, and diagonally
+bool Winner (char board[][COLUMNS], int r){
+    //player found
+    char playerw=board[0][0];
     
+    //player wins horizontally
+    for(int i=0;i<r;i++){
+        for(int j=0;j<COLUMNS;j++){
+            if(board [i][j] =='n' && playerw != board [i][j]){
+                break;
+                
+            }
+            playerw=board [i][j];
+            if (j==2){
+                cout<<"The winner is player "<<playerw<<"!!!!"<<endl;
+                return true;
+                
+            }
+        }
+        
+    }
+    
+}
+
 void DisplayBoard (char board[][COLUMNS], int r){
     for(int i=0;i<r;i++){
         for(int j=0;j<COLUMNS;j++){
