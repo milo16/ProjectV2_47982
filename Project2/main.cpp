@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Luis Pow Sang
- * December 3rd, 2013, 5:00 PM
+ * December 4rth, 2013
  * Tic Tac Toe Game 
  */
 
@@ -9,14 +9,14 @@
 #include <iostream>
 using namespace std;
 
-//Global Constants
+//No Global Constants
 
 //Function Prototypes
 const int COLUMNS=3;//declare variable for COLUMNS
 void Initialization (char board[][COLUMNS],int);
 void DisplayBoard (char board[][COLUMNS], int);
-bool Winner (char board[][COLUMNS], int);
-
+bool Winner (char board[][COLUMNS], int, char);
+bool Tie (char board[][COLUMNS], int);
 
 //Execution begins here
 int main(int argc, char** argv) {
@@ -59,29 +59,67 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-//Function determines the winner horizontally, vertically, and diagonally
-bool Winner (char board[][COLUMNS], int r){
-    //player found
-    char playerw=board[0][0];
-    
-    //player wins horizontally
+// Function determines when the game is a tie
+bool Tie (char board[][COLUMNS], int r){
     for(int i=0;i<r;i++){
         for(int j=0;j<COLUMNS;j++){
-            if(board [i][j] =='n' && playerw != board [i][j]){
-                break;
+            if(board [i][j]== 'n')
+            {
+                // if there is an empty space there is no tie
+                return false;
                 
             }
-            playerw=board [i][j];
-            if (j==2){
-                cout<<"The winner is player "<<playerw<<"!!!!"<<endl;
-                return true;
-                
-            }
+            
         }
-        
     }
     
+    // A tie because there isn't an empty space
+    cout<<"It's a tie!!!!!"<<endl;
+    return true;
 }
+
+
+ // Function determines the winner
+bool Winner (char board[][COLUMNS], int r, char player)
+{
+    // horizontal win
+    for (int i=0; i<r; i++)
+    {
+        if (board[i][0] == player &&
+            board[i][1] == player &&
+            board[i][2] == player)
+
+            return true;
+    }
+    
+    // vertical win
+    for (int i=0; i<r; i++)
+    {
+        if (board[0][i] == player &&
+            board[1][i] == player &&
+            board[2][i] == player)
+            
+            return true;
+    }
+    
+    // diagonal '/'
+    if (board[2][0] == player &&
+        board[1][1] == player &&
+        board[0][2] == player)
+        
+        return true;
+    
+    // diagonal '\'
+    if (board[0][0] == player &&
+        board[1][1] == player &&
+        board[2][2] == player)
+        
+        return true;
+    
+    // return false (no a winner)
+    return false;
+}
+
 
 void DisplayBoard (char board[][COLUMNS], int r){
     for(int i=0;i<r;i++){
